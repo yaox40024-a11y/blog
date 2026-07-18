@@ -12,8 +12,7 @@ const posts = Object.values(
 ---
 
 <Base title="我的博客" description="用 Astro 搭的静态博客">
-  <h1>文章</h1>
-  <ul style="list-style: none; padding: 0;">
+  <ul style="list-style: none; padding: 0; margin: 0;">
     {posts.map((post) => (
       <li style="margin: 1.5rem 0;">
         <a href={post.url} style="font-size: 1.1rem; text-decoration: none;">
