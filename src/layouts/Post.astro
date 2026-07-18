@@ -1,12 +1,13 @@
 ---
 import Base from './Base.astro';
 const { frontmatter } = Astro.props;
+const day = new Date(frontmatter.date).toISOString().slice(0, 10);
 ---
 
 <Base title={frontmatter.title} description={frontmatter.description}>
   <article>
     <h1>{frontmatter.title}</h1>
-    <time datetime={frontmatter.date}>{frontmatter.date}</time>
+    <time datetime={day}>{day}</time>
     <slot />
   </article>
 </Base>
