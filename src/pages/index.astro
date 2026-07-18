@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+
+const posts = Object.values(
+  import.meta.glob('./posts/*.md', { eager: true })
+)
+  .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date))
+  .map((post) => ({
+    ...post,
+    day: new Date(post.frontmatter.date).toISOString().slice(0, 10),
+  }));
+---
+
+<Base title="我的博客" description="用 Astro 搭的静态博客">
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    {posts.map((post) => (
+      <li style="margin: 1.5rem 0;">
+        <a href={post.url} style="font-size: 1.1rem; text-decoration: none;">
+          {post.frontmatter.title}
+        </a>
+        <br />
+        <time datetime={post.day}>{post.day}</time>
+        {post.frontmatter.description && (
+          <p style="margin: .35rem 0 0; color: var(--muted);">{post.frontmatter.description}</p>
+        )}
+      </li>
+    ))}
+  </ul>
+</Base>
